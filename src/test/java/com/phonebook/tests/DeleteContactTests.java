@@ -1,11 +1,10 @@
 package com.phonebook.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AddContactTests extends TestBase{
+public class DeleteContactTests extends TestBase{
 
     @BeforeMethod
     public void precondition(){
@@ -14,20 +13,20 @@ public class AddContactTests extends TestBase{
                 .setEmail("manuel67@gmail.com")
                 .setPassword("Pp1234567!"));
         clickOnLoginButton();
-    }
-    @Test
-    public void addContactPositiveTest(){
 
         clickOnAddLink();
         fillContactForm("Alex", "Stern", "1234567890", "test@gm.com", "Berlin", "QA");
         clickOnSaveButton();
-        Assert.assertTrue(isContactCreatedByText("Alex"));
     }
+                @Test
+         public void deleteContactTest(){
 
-    @AfterMethod
-  public void postCondition(){
+        int sizeBefore = sizeOfContacts();
+                    removeContact();
 
-      removeContact();
-  }
+                    pause(1000);
+        int sizeAfter = sizeOfContacts();
+                    Assert.assertEquals(sizeAfter,sizeBefore-1);
+    }
 
 }
