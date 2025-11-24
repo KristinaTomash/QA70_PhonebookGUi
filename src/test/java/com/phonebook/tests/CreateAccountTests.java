@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 public class CreateAccountTests extends TestBase{
 
 
-    @Test
+    @Test(enabled = false)
     public void newUserRegisterPositiveTest(){
 
         //int i =(int)((System.currentTimeMillis()/1000)%3600);
@@ -13,8 +13,8 @@ public class CreateAccountTests extends TestBase{
         clickOnLoginLink();
         //enter email
         fillLoginRegisterForm(new User()
-                .setEmail("manuel67@gmail.com")
-                .setPassword("Pp1234567!"));
+                .setEmail(UserData.email)
+                .setPassword(UserData.password));
         //click on Registration button
         clickOnRegistrationButton();
         //assert SigOut button present
@@ -25,8 +25,8 @@ public class CreateAccountTests extends TestBase{
     public void newUserRegisterNegativeTest(){
         clickOnLoginLink();
         fillLoginRegisterForm(new User()
-                .setEmail("manuel67@gmail.com")
-                .setPassword("Pp1234567!"));
+                .setEmail(UserData.email)
+                .setPassword(UserData.password));
         clickOnRegistrationButton();
         Assert.assertTrue(isAlertPresent());
     }

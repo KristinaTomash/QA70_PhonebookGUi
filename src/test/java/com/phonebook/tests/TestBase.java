@@ -44,9 +44,11 @@ public class TestBase {
     }
 
     public void type(By locator, String text) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        if(text!=null) {
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
     }
 
     public boolean isAlertPresent() {
@@ -86,19 +88,18 @@ public class TestBase {
         click(By.cssSelector(".add_form__2rsm2 button"));
     }
 
-    public void fillContactForm(String name, String lastName, String phone,
-                                String email, String address, String description) {
-        type(By.xpath("//input[1]"), name);
+    public void fillContactForm(Contact contact) {
+        type(By.xpath("//input[1]"), contact.getName());
         //enter lastname
-        type(By.xpath("//input[2]"), lastName);
+        type(By.xpath("//input[2]"), contact.getLastName());
         //enter phone
-        type(By.xpath("//input[3]"), phone);
+        type(By.xpath("//input[3]"), contact.getPhone());
         //enter email
-        type(By.xpath("//input[4]"), email);
+        type(By.xpath("//input[4]"), contact.getEmail());
         //enter address
-        type(By.xpath("//input[5]"), address);
+        type(By.xpath("//input[5]"), contact.getAddress());
         //enter description
-        type(By.xpath("//input[6]"), description);
+        type(By.xpath("//input[6]"), contact.getDescription());
     }
 
     public void clickOnAddLink() {

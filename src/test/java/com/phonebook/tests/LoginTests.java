@@ -9,8 +9,8 @@ public class LoginTests extends TestBase{
         public void loginPositiveTest(){
             clickOnLoginLink();
             fillLoginRegisterForm(new User()
-                    .setEmail("manuel67@gmail.com")
-                    .setPassword("Pp1234567!"));
+                    .setEmail(UserData.email)
+                    .setPassword(UserData.password));
             clickOnLoginButton();
             Assert.assertTrue(isSignOutButtonPresent());
 
@@ -19,9 +19,9 @@ public class LoginTests extends TestBase{
         public void loginNegativeWithoutEmailTest(){
             clickOnLoginLink();
             fillLoginRegisterForm(new User()
-                    .setPassword("Pp1234567!"));
+                    .setPassword(UserData.password));
             clickOnLoginButton();
-            Assert.assertTrue(isSignOutButtonPresent());
+            Assert.assertTrue(isAlertPresent());
 
     }
 

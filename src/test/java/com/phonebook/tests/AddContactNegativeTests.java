@@ -1,11 +1,10 @@
 package com.phonebook.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AddContactTests extends TestBase{
+public class AddContactNegativeTests extends TestBase{
 
     @BeforeMethod
     public void precondition(){
@@ -16,23 +15,17 @@ public class AddContactTests extends TestBase{
         clickOnLoginButton();
     }
     @Test
-    public void addContactPositiveTest(){
-
+    public void addContactWithInvalidPhone(){
         clickOnAddLink();
         fillContactForm(new Contact()
                 .setName(ContactData.name)
                 .setLastName(ContactData.lastName)
-                .setPhone(ContactData.phone)
+                .setPhone("123456789")
                 .setEmail(ContactData.email)
                 .setAddress(ContactData.address)
                 .setDescription(ContactData.description));
         clickOnSaveButton();
-        Assert.assertTrue(isContactCreatedByText(ContactData.name));
+        Assert.assertTrue(isAlertPresent());
+
     }
-
-    @AfterMethod
-  public void postCondition(){
-      removeContact();
-  }
-
 }

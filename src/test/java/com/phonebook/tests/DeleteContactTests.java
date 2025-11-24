@@ -10,12 +10,18 @@ public class DeleteContactTests extends TestBase{
     public void precondition(){
         clickOnLoginLink();
         fillLoginRegisterForm(new User()
-                .setEmail("manuel67@gmail.com")
-                .setPassword("Pp1234567!"));
+                .setEmail(UserData.email)
+                .setPassword(UserData.password));
         clickOnLoginButton();
 
         clickOnAddLink();
-        fillContactForm("Alex", "Stern", "1234567890", "test@gm.com", "Berlin", "QA");
+        fillContactForm(new Contact()
+                .setName(ContactData.name)
+                .setLastName(ContactData.lastName)
+                .setPhone(ContactData.phone)
+                .setEmail(ContactData.email)
+                .setAddress(ContactData.address)
+                .setDescription(ContactData.description));
         clickOnSaveButton();
     }
                 @Test
