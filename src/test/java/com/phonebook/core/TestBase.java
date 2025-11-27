@@ -4,10 +4,7 @@ import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -17,17 +14,17 @@ public class TestBase {
 
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void startTest(Method method){
         logger.info("Start test {}",method.getName());
     }
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setUp(){
         app.init();
     }
 
-   @AfterMethod(enabled = true)
+   @AfterMethod(alwaysRun = true)
    public void stopTest(ITestResult result){
         if(result.isSuccess()){
             logger.info("PASSED: {}", result.getMethod().getMethodName());
@@ -39,9 +36,17 @@ public class TestBase {
         logger.info("Stop test");
         logger.info("************************************");
    }
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void tearDown(){
         app.stop();
     }
+        @BeforeGroups("smoky")
+    public void setUpSmokyGroup(){
+       logger.info("Start smoky test");
+    }
+        @AfterGroups("smoky")
+    public void stopSmokyTestGroup(){
+        logger.info("Stop smoky test");
 
+}
 }

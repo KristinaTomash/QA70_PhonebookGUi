@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class AddContactTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void precondition(){
         if(!app.getUser().isLoginLinkPresent()){
             app.getUser().clickOnSignOutButton();
@@ -23,7 +23,7 @@ public class AddContactTests extends TestBase {
                 .setPassword(UserData.password));
         app.getUser().clickOnLoginButton();
     }
-    @Test
+    @Test(groups = "smoky")
     public void addContactPositiveTest(){
 
         app.getContact().clickOnAddLink();

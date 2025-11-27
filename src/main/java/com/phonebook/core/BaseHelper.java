@@ -12,9 +12,11 @@ import java.time.Duration;
 public class BaseHelper {
 
     protected WebDriver driver;
+    
 
     public BaseHelper(WebDriver driver) {
         this.driver = driver;
+       
     }
 
     public boolean isElementPresent(By locator){
@@ -34,7 +36,7 @@ public class BaseHelper {
     }
 
     public boolean isAlertPresent() {
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(20))
+        Alert alert = getWait(20)
                 .until(ExpectedConditions.alertIsPresent());
         if (alert == null) {
             return false;
@@ -42,6 +44,10 @@ public class BaseHelper {
             driver.switchTo().alert().accept();
             return true;
         }
+    }
+
+    public WebDriverWait getWait(int seconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(seconds));
     }
 
     public void pause(int millis){
@@ -53,6 +59,11 @@ public class BaseHelper {
 
     }
     public String takeScreenshot(){
+        try {
+            Alert alert = getWait(10).until(ExpectedConditions.alertIsPresent());
+            alert.accept();
+        } catch (NoAlertPresentException ignored) {
+        }
 
         File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File screenshot = new File("screenshots/screen-" + System.currentTimeMillis() + ".png");

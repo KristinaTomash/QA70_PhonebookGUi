@@ -12,7 +12,7 @@ public class HomePageTests extends TestBase {
                 app.getHomePage().clickOnHomeLink();
 
 }}
-    @Test
+    @Test(groups = "smoky")
     public void isHomeComponentPresentTest(){
        // System.out.println("Home Component is " + isHomeComponentPresent());
         Assert.assertTrue(app.getHomePage().isHomeComponentPresent());
